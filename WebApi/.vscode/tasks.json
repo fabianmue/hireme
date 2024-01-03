@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build solution",
+      "detail": "dotnet build",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Apply migrations",
+      "detail": "dotnet ef database update",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["ef", "database", "update", "--startup-project", ".\\WebApi\\"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Prepare run",
+      "dependsOn": ["Build solution", "Apply migrations"]
+    },
+    {
+      "label": "Create initial migration",
+      "detail": "dotnet ef database update",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "ef",
+        "migrations",
+        "add",
+        "Initial",
+        "--startup-project",
+        ".\\WebApi\\"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build container",
+      "detail": "docker build",
+      "type": "shell",
+      "command": "docker",
+      "args": ["build", "--tag", "hireme-webapi", "."],
+      "problemMatcher": []
+    },
+    {
+      "label": "Format code",
+      "detail": "dotnet csharpier",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["csharpier", "."],
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run WebApi (Terminal)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Prepare run",
+      "program": "${workspaceFolder}/WebApi/bin/Debug/net8.0/WebApi.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/WebApi",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    }
+  ]
+}
