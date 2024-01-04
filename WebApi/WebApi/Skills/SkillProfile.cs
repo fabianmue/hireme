@@ -2,9 +2,9 @@ using AutoMapper;
 
 namespace HireMe.WebApi.Skills;
 
-public abstract class SkillProfile : Profile
+public class SkillProfile : Profile
 {
-    protected SkillProfile()
+    public SkillProfile()
     {
         CreateMap<SkillWriteDto, Skill>();
         CreateMap<Skill, SkillDto>();

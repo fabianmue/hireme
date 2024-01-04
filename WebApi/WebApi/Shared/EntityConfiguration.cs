@@ -10,11 +10,11 @@ public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TE
     {
         builder
             .Property(entity => entity.CreatedAt)
-            .HasDefaultValueSql("GETDATE()")
+            .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd();
         builder
             .Property(entity => entity.ModifiedAt)
-            .HasDefaultValueSql("GETDATE()")
+            .HasDefaultValueSql("now()")
             .ValueGeneratedOnUpdate();
     }
 }
