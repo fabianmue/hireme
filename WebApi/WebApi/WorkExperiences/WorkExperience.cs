@@ -13,13 +13,20 @@ public class WorkExperience : Entity
     ]
     public required string JobTitle { get; set; }
 
+    [
+        Comment("Company, institution or alike"),
+        Required(AllowEmptyStrings = false),
+        StringLength(64, MinimumLength = 4)
+    ]
+    public required string Employer { get; set; }
+
     public required List<string> Responsibilities { get; set; } = [];
 
-    [Comment("Start date"), Required, DataType(DataType.DateTime)]
-    public required DateTime From { get; set; }
+    [Comment("Start date"), Required, DataType(DataType.Date)]
+    public required DateOnly From { get; set; }
 
-    [Comment("End date, null means still active"), DataType(DataType.DateTime)]
-    public required DateTime? To { get; set; }
+    [Comment("End date, null means still active"), DataType(DataType.Date)]
+    public DateOnly? To { get; set; }
 
     [
         Comment("Office location"),
