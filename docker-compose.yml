@@ -1,0 +1,19 @@
+services:
+  webapi:
+    container_name: hireme-webapi
+    image: hireme-webapi:latest
+    command: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      HIREME_WEBAPI_DB_HOST: hireme-database
+      HIREME_WEBAPI_DB_PASSWORD: securePassword123_
+    ports:
+      - "8080:8080"
+
+  database:
+    container_name: hireme-database
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: securePassword123_
+      POSTGRES_USER: hireme
+      POSTGRES_DB: hireme

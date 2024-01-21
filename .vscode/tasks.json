@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run containers",
+      "detail": "docker compose up",
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up"],
+      "problemMatcher": []
+    }
+  ]
+}
