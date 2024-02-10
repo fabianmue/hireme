@@ -2,7 +2,7 @@
 
 This is a monorepo containing source code for a sample web application. Its purposes include demonstrating implementation concepts and serving as a reference.
 
-## Technologies
+## Components
 
 ### Web API
 
@@ -11,6 +11,8 @@ Built with [ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core) 8, uses
 Notable (NuGet) packages
 
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) with [Npgsql Provider](https://www.npgsql.org/efcore/)
+
+Component documentation: [WEBAPI.md](./WebApi/WEBAPI.md)
 
 ### Web client
 
