@@ -1,2 +1,6 @@
-*/obj/
-*/bin/
+# .NET build output
+*/obj/*
+*/bin/*
+
+# Migration script (generated)
+WebApi/Migrations/migrate.sql

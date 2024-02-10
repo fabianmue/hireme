@@ -5,7 +5,7 @@
       "name": "Run WebApi (Terminal)",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "Prepare run",
+      "preLaunchTask": "Prepare launch",
       "program": "${workspaceFolder}/WebApi/bin/Debug/net8.0/WebApi.dll",
       "args": [],
       "cwd": "${workspaceFolder}/WebApi",

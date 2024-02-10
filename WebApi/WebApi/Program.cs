@@ -11,7 +11,7 @@ builder.Services.AddDbContext<WebApiContext>(options =>
     var connectionStringBuilder = new NpgsqlConnectionStringBuilder
     {
         Host = builder.Configuration.GetValue<string>("HIREME_WEBAPI_DB_HOST")!,
-        Database = builder.Configuration.GetValue<string>("HIREME_WEBAPI_DB_DATABASE")!,
+        Database = builder.Configuration.GetValue<string>("HIREME_WEBAPI_DB_NAME")!,
         Username = builder.Configuration.GetValue<string>("HIREME_WEBAPI_DB_USERNAME")!,
         Password = builder.Configuration.GetValue<string>("HIREME_WEBAPI_DB_PASSWORD")!,
     };

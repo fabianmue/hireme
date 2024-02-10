@@ -2,38 +2,75 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build solution",
-      "detail": "dotnet build",
-      "type": "shell",
-      "command": "dotnet",
-      "args": ["build"],
-      "problemMatcher": []
-    },
-    {
-      "label": "Apply migrations",
-      "detail": "dotnet ef database update",
-      "type": "shell",
-      "command": "dotnet",
-      "args": ["ef", "database", "update", "--startup-project", ".\\WebApi\\"],
-      "problemMatcher": []
-    },
-    {
-      "label": "Prepare run",
-      "dependsOn": ["Build solution", "Apply migrations"]
-    },
-    {
-      "label": "Create initial migration",
-      "detail": "dotnet ef database update",
+      "label": "Generate migration script",
+      "detail": "dotnet ef migrations script",
       "type": "shell",
       "command": "dotnet",
       "args": [
         "ef",
         "migrations",
-        "add",
-        "Initial",
-        "--startup-project",
-        ".\\WebApi\\"
+        "script",
+        "--idempotent",
+        "--project",
+        "WebApi/WebApi.csproj",
+        "--output",
+        "WebApi/Migrations/migrate.sql"
       ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Drop and create database",
+      "detail": "psql -f drop-and-create.sql",
+      "type": "shell",
+      "command": "psql",
+      "args": [
+        "-h",
+        "HIREME_WEBAPI_DB_HOST",
+        "-U",
+        "$Env:HIREME_WEBAPI_DB_USERNAME",
+        "-W",
+        "$Env:HIREME_WEBAPI_DB_PASSWORD",
+        "-f",
+        "WebApi/Migrations/drop-and-create.sql"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Apply migrations",
+      "detail": "psql -f migrate.sql",
+      "type": "shell",
+      "command": "psql",
+      "args": [
+        "-h",
+        "HIREME_WEBAPI_DB_HOST",
+        "-d",
+        "HIREME_WEBAPI_DB_NAME",
+        "-U",
+        "$Env:HIREME_WEBAPI_DB_USERNAME",
+        "-W",
+        "$Env:HIREME_WEBAPI_DB_PASSWORD",
+        "-f",
+        "WebApi/Migrations/migrate.sql"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Prepare launch",
+      "type": "shell",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Generate migration script",
+        "Drop and recreate database",
+        "Apply migrations"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build solution",
+      "detail": "dotnet build",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["build"],
       "problemMatcher": []
     },
     {
@@ -51,6 +88,29 @@
       "command": "dotnet",
       "args": ["csharpier", "."],
       "problemMatcher": []
+    },
+    {
+      "label": "Add migration",
+      "detail": "dotnet ef migrations add",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "ef",
+        "migrations",
+        "add",
+        "${input:migrationName}",
+        "--project",
+        "WebApi/WebApi.csproj"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "description": "name of the migration to add",
+      "type": "promptString",
+      "default": "Initial"
     }
   ]
 }
