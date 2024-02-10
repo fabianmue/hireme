@@ -46,7 +46,7 @@ public class WebApiContext : DbContext
                 new Skill
                 {
                     Id = 4,
-                    Description = "CI / CD Pipelines",
+                    Description = "CI / CD pipelines",
                     Proficiency = 3,
                     CreatedAt = DateTime.UtcNow
                 },
